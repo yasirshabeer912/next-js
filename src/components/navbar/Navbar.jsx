@@ -1,37 +1,20 @@
-import Link from "next/link";
-import './navbar.module.css'
-const Navbar = () => {
-  const links = [
-    {
-      title: "Homepage",
-      path: "/",
-    },
-    {
-      title: "About",
-      path: "/about",
-    },
-    {
-      title: "Contact",
-      path: "/contact",
-    },
-    {
-      title: "Blog",
-      path: "/blog",
-    },
-  ];
+import Link from "next/link"
+import Links from "./links/Links"
+import styles from "./navbar.module.css"
+// import { auth } from "@/lib/auth";
+
+const Navbar = async () => {
+
+  // const session = await auth();
 
   return (
-    <div>
-      <div className="logo">Logo</div>
+    <div className={styles.container}>
+      <Link href="/" className={styles.logo}>Logo</Link>
       <div>
-        {links.map((link) => (
-          <Link href={link.path} key={link.title}>
-            {link.title}
-          </Link>
-        ))}
+        <Links/>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
