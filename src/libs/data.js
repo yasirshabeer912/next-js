@@ -1,29 +1,29 @@
+import { Post } from "./models";
+import { connectToDb } from "./utils";
+
 const users= [
     {id:1,name:'Yasir'},
     {id:2,name:'Bilal'}
 ]
 
 
-const posts =[
-    {id:1, title:'Post1', body:'---------', userId:1},
-    {id:2, title:'Post2', body:'---------', userId:1},
-    {id:3, title:'Post3', body:'---------', userId:1},
-    {id:4, title:'Post4', body:'---------', userId:2},
-    {id:5, title:'Post5', body:'---------', userId:2}
-]
+
 
 
 export const getPosts = async ()=>{
+    connectToDb();
+    const posts = await Post.find();
+    console.log(posts);
     return posts;
 }
 
-export const singlePost = async(id)=>{
-    const post = posts.find((p) => p.id === parseInt(id)); 
+export const singlePost = async(slug)=>{
+    const post = await Post.find({slug}) 
     return post;
 }
 
 export const findUser = async (id)=>{
-    const user = users.find((user) => user.id === parseInt(id));
+    const user = Post.find({id});
     console.log('user', user);
     return user;
 }
