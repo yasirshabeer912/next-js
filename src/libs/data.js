@@ -1,4 +1,4 @@
-import { Post } from "./models";
+import { Post, User } from "./models";
 import { connectToDb } from "./utils";
 
 const users= [
@@ -18,12 +18,17 @@ export const getPosts = async ()=>{
 }
 
 export const singlePost = async(slug)=>{
-    const post = await Post.find({slug}) 
+    const post = await Post.findOne({slug}) 
     return post;
 }
 
 export const findUser = async (id)=>{
-    const user = Post.find({id});
-    console.log('user', user);
+    const user = User.findById(id);
+    // console.log('user', user);
     return user;
+}
+export const AllUsers = async (id)=>{
+    const users = User.find();
+    // console.log('user', users);
+    return users;
 }

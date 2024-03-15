@@ -10,6 +10,7 @@ import { findUser } from '@/libs/data';
 const PostUser = async ({ userId }) => {
     console.log('userid ',userId);
     const user = await findUser(userId)
+    console.log('userid ',user);
     return (
         <div className={styles.container}>
             <Image
@@ -21,7 +22,7 @@ const PostUser = async ({ userId }) => {
             />
             <div className={styles.texts}>
                 <span className={styles.title}>Author</span>
-                <span className={styles.username}>{user.name}</span>
+                <span className={styles.username}>{user.username}</span>
             </div>
         </div>
     )

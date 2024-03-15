@@ -5,20 +5,23 @@ import PostUser from "@/components/PostUser/PostUser";
 import PostUserSkeletion from "@/components/PostUser/PostUserSkeleton/PostUserSkeletion";
 import { singlePost } from "@/libs/data";
 
-// const getData = async (slug) => {
-//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`, { next: { revalidate: 3600 } });
-//   return res.json()
+const getData = async (slug) => {
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`, { next: { revalidate: 3600 } });
+  return res.json()
 
-// }
+}
 
 const SinglePostPage = async ({ params }) => {
   const { slug } = params
-  const post = await singlePost(slug)
+
+  const post = await getData(slug);
+  // const post = await singlePost(slug)
+  console.log('post',post);
   return (
     <div className={styles.container}>
 
       <div className={styles.imgContainer}>
-        <Image src='https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600' alt="" fill className={styles.img} />
+        <Image src={post.image} alt="" fill className={styles.img} />
       </div>
       <div className={styles.textContainer}>
         <h1 className={styles.title}>{post.title}</h1>
@@ -35,7 +38,7 @@ const SinglePostPage = async ({ params }) => {
             </span>
           </div>
         </div>
-        <div className={styles.content}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum iure vero nulla dolores delectus esse quae ut, nihil fugit, excepturi itaque. Vitae nostrum, consectetur eos possimus eum eius voluptas dolor.</div>
+        <div className={styles.content}>{post.body}</div>
       </div>
     </div>
   );
